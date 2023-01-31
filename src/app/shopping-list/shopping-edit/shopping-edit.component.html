@@ -1,0 +1,59 @@
+<div class="row">
+  <div class="col-xs-12">
+    <!-- ngSubmit is used to submit a form.ngForm is used to get access to the javascript object angular created behind the scenes and we assign it to a local reference. and we pass that local reference in onAddItem method.-->
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+      <div class="row">
+        <div class="col-sm-5 form-group">
+          <label for="name">Name</label>
+          <!-- name between the quotation marks is the name of property of form object.we also register ngModel in this input element so that we are registering it as a control in our template driven form. -->
+          <input
+            type="text"
+            id="name"
+            name="name"
+            ngModel
+            required
+            class="form-control"
+          />
+        </div>
+        <div class="col-sm-2 form-group">
+          <label for="amount">Amount</label>
+          <!-- what we entered in pattern makes sure that we enter positive numbers in the amount (quantity) since it should be positive. -->
+          <input
+            type="number"
+            id="amount"
+            name="amount"
+            ngModel
+            required
+            pattern="^[1-9]+[0-9]*$"
+            class="form-control"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <!-- here Add button will submit the form bcoz it is of type submit. -->
+          <button
+            class="btn btn-success"
+            type="submit"
+            style="margin-right: 16px"
+            [disabled]="!f.valid"
+          >
+            {{ editMode ? "Update" : "Add" }}
+          </button>
+          <button
+            class="btn btn-danger"
+            type="button"
+            style="margin-right: 16px"
+            (click)="onDelete()"
+            *ngIf="editMode"
+          >
+            Delete
+          </button>
+          <button class="btn btn-primary" type="button" (click)="onClear()">
+            Clear
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
